@@ -20,11 +20,11 @@ export class Duration implements IDuration {
 		this.normalize();
 	}
 
-	public static fromObject(duration: IPartialDuration) {
+	public static fromObject(duration: IPartialDuration): Duration {
 		return new Duration(duration.hours ?? 0, duration.minutes ?? 0, duration.seconds ?? 0);
 	}
 
-	public toString() {
+	public toString(): string {
 		const pad = (unit: number) => {
 			return unit.toString().padStart(2, '0');
 		};
@@ -35,12 +35,30 @@ export class Duration implements IDuration {
 		return `${this.minutes}:${pad(this.seconds)}`;
 	}
 
-	public add(duration: IPartialDuration) {
-		this.hours += duration.hours ?? 0;
-		this.minutes += duration.minutes ?? 0;
-		this.seconds += duration.seconds ?? 0;
-		this.normalize();
-		return this;
+	public add(duration: IPartialDuration): Duration {
+		return Duration.fromObject({
+			hours: this.hours + (duration.hours ?? 0),
+			minutes: this.minutes + (duration.minutes ?? 0),
+			seconds: this.seconds + (duration.seconds ?? 0)
+		});
+	}
+
+	public subtract(duration: IPartialDuration): Duration {
+		return Duration.fromObject({
+			hours: this.hours - (duration.hours ?? 0),
+			minutes: this.minutes - (duration.minutes ?? 0),
+			seconds: this.seconds - (duration.seconds ?? 0)
+		});
+	}
+
+	public multiply(factor: number): Duration {
+		const totalSeconds = this.hours * 3600 + this.minutes * 60 + this.seconds;
+		const durationSeconds = factor * totalSeconds;
+		return Duration.fromObject({ seconds: Math.floor(durationSeconds) });
+	}
+
+	public divide(factor: number): Duration {
+		return this.multiply(1 / factor);
 	}
 
 	private normalize() {
