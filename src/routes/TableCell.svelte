@@ -1,14 +1,10 @@
 <script lang="ts" context="module">
-	export enum CellType {
-		Default,
-		Disabled,
-		TimeDuration
-	}
 </script>
 
 <script lang="ts">
-	export let cellType: CellType = CellType.Default;
-	export let cellValue: string;
+	import { Duration } from '$lib/duration';
+
+	export let cellValue: number | Duration;
 
 	let isFocused = false;
 	const toggleFocus = () => (isFocused = !isFocused);
@@ -16,26 +12,22 @@
 	const autofocus = (el: HTMLInputElement) => el.focus();
 </script>
 
-{#if cellType == CellType.Disabled}
-	<td>{cellValue}</td>
-{:else}
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<td on:click={toggleFocus}>
-		{#if isFocused}
-			{#if cellType == CellType.Default}
-				<!-- svelte-ignore a11y-autofocus -->
-				<input use:autofocus on:blur={toggleFocus} bind:value={cellValue} />
-			{:else if cellType == CellType.TimeDuration}
-				ABC
-			{/if}
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<td on:click={toggleFocus}>
+	{#if isFocused}
+		<!-- svelte-ignore a11y-autofocus -->
+		{#if cellValue instanceof Duration}
+			<input use:autofocus on:blur={toggleFocus} bind:value={cellValue} />
 		{:else}
-			<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->
-			<a on:focus={toggleFocus} tabindex="0" />
-			{cellValue}
-			<abbr class="unit" title="kilometers">km</abbr>
+			<input use:autofocus on:blur={toggleFocus} bind:value={cellValue} />
 		{/if}
-	</td>
-{/if}
+	{:else}
+		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->
+		<a on:focus={toggleFocus} tabindex="0" />
+		{cellValue}
+		<abbr class="unit" title="kilometers">km</abbr>
+	{/if}
+</td>
 
 <style>
 	abbr[title] {
