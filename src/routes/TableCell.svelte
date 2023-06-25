@@ -1,10 +1,15 @@
 <script lang="ts" context="module">
+	export enum CellSuffix {
+		Kilometer,
+		MinutesPerKilometer
+	}
 </script>
 
 <script lang="ts">
 	import { Duration } from '$lib/duration';
 
 	export let cellValue: number | Duration;
+	export let cellSuffix: CellSuffix = CellSuffix.Kilometer;
 
 	let isFocused = false;
 	const toggleFocus = () => (isFocused = !isFocused);
@@ -25,7 +30,11 @@
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->
 		<a on:focus={toggleFocus} tabindex="0" />
 		{cellValue}
-		<abbr class="unit" title="kilometers">km</abbr>
+		{#if cellSuffix == CellSuffix.Kilometer}
+			<abbr class="unit" title="kilometers">km</abbr>
+		{:else if cellSuffix == CellSuffix.MinutesPerKilometer}
+			<abbr class="unit" title="minutes per kilometer">/km</abbr>
+		{/if}
 	{/if}
 </td>
 
