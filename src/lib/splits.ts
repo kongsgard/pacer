@@ -1,10 +1,25 @@
 import { Duration } from './duration';
 
+export function computeCumulativeNumber(splits: number[]) {
+	return splits.reduce((a, b, i) => (i === 0 ? [b] : [...a, (b += a[i - 1])]), [0]);
+}
+
 export function computeCumulativeTime(splits: Duration[]) {
 	return splits.reduce(
 		(a, b, i) => (i === 0 ? [b] : [...a, b.add(a[i - 1])]),
 		[Duration.fromObject({})]
 	);
+}
+
+export function computeSplitDistances(totalDistance: number, splitDistance: number): number[] {
+	const fullSplitCount = Math.floor(totalDistance / splitDistance);
+	const splitDistances: number[] = Array(Math.floor(fullSplitCount)).fill(splitDistance);
+
+	const splitDistancesSum = splitDistances.reduce((a, b) => (a += b), 0);
+	if (totalDistance - splitDistancesSum > 0) {
+		splitDistances.push(totalDistance - splitDistancesSum);
+	}
+	return splitDistances;
 }
 
 export function computeEqualSplits(
@@ -28,4 +43,8 @@ export function computeEqualSplits(
 	}
 
 	return splits;
+}
+
+export function computeSplitsPace(splits: Duration[], splitDistances: number[]) {
+	return splits.map((split, index) => split.divide(splitDistances[index]));
 }
