@@ -13,20 +13,20 @@
 	const totalDistance = 10;
 	const splitDistance = 1;
 
-	let columns = ['Split Distance', 'Split Time', 'Pace', 'Total Distance', 'Total Time'];
+	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
 
 	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
 	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);
-	const splitsPace = computeSplitsPace(splits, splitDistances);
 	const totalDistances = computeCumulativeNumber(splitDistances);
 	const totalTimes = computeCumulativeTime(splits);
+	const splitsPace = computeSplitsPace(splits, splitDistances);
 
 	const zip = (...arr: any[]) =>
 		Array(Math.max(...arr.map((a) => a.length)))
 			.fill('')
 			.map((_, i) => arr.map((a) => a[i]));
 
-	let data = zip(splitDistances, splits, splitsPace, totalDistances, totalTimes);
+	let data = zip(splitDistances, splits, totalDistances, totalTimes, splitsPace);
 </script>
 
 <table>
