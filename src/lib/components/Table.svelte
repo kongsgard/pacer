@@ -34,14 +34,6 @@
 </table>
 
 <style>
-	:global(body) {
-		max-width: 1024px;
-		margin: 0 auto;
-		font-family: Segoe UI, Helvetica Neue, -apple-system, system-ui, BlinkMacSystemFont, Roboto,
-			Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-		font-size: 14px;
-	}
-
 	table {
 		margin: 0 auto;
 		border: 1px solid #dfdfe8;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import RaceDistance from '$lib/components/RaceDistance.svelte';
 	import Table from '$lib/components/Table.svelte';
 	import { Duration } from '$lib/functions/duration';
 
@@ -7,4 +8,13 @@
 	const splitDistance = 1;
 </script>
 
-<Table {totalTime} {totalDistance} {splitDistance} />
+<main>
+	<RaceDistance />
+	<Table {totalTime} {totalDistance} {splitDistance} />
+</main>
+
+<style>
+	main {
+		margin: 3rem 0.5rem 8rem 0.5rem;
+	}
+</style>
