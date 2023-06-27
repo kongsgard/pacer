@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-	import { Duration } from '$lib/duration';
+	import { Duration } from '$lib/functions/duration';
 
 	export let cellValue: number | Duration;
 	export let cellSuffix: CellSuffix = CellSuffix.Kilometer;

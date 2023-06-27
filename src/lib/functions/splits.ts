@@ -35,7 +35,7 @@ function computeCumulativeNumber(splits: number[]) {
 	return splits.reduce((a, b, i) => (i === 0 ? [b] : [...a, (b += a[i - 1])]), [0]);
 }
 
-function computeCumulativeTime(splits: Duration[]) {
+export function computeCumulativeTime(splits: Duration[]) {
 	return splits.reduce(
 		(a, b, i) => (i === 0 ? [b] : [...a, b.add(a[i - 1])]),
 		[Duration.fromObject({})]
@@ -53,7 +53,7 @@ function computeSplitDistances(totalDistance: number, splitDistance: number): nu
 	return splitDistances;
 }
 
-function computeEqualSplits(
+export function computeEqualSplits(
 	totalTime: Duration,
 	totalDistance: number,
 	splitDistance: number
