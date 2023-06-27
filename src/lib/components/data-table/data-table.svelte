@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { Duration } from '$lib/functions/duration';
+	import type { Duration } from '$lib/functions/duration';
 	import { computeRunningData } from '$lib/functions/splits';
-	import TableCell, { CellSuffix } from './TableCell.svelte';
+	import TableCell, { CellSuffix } from './table-cell.svelte';
 
 	export let totalTime: Duration;
 	export let totalDistance: number;

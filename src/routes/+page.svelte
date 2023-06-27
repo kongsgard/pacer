@@ -1,6 +1,6 @@
 <script lang="ts">
-	import RaceDistance from '$lib/components/RaceDistance.svelte';
-	import Table from '$lib/components/Table.svelte';
+	import { DataTable } from '$lib/components/data-table';
+	import RaceDistance from './race-distance.svelte';
 	import { Duration } from '$lib/functions/duration';
 
 	const totalTime = Duration.fromObject({ minutes: 36, seconds: 59 });
@@ -10,7 +10,7 @@
 
 <main>
 	<RaceDistance />
-	<Table {totalTime} {totalDistance} {splitDistance} />
+	<DataTable {totalTime} {totalDistance} {splitDistance} />
 </main>
 
 <style>
