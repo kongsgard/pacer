@@ -5,11 +5,10 @@
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
 	export let totalTime: Duration = Duration.fromObject({ minutes: 30 });
-	export let splitDistance: number = 1;
 
 	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
 	let data: IRunningData[] = [];
-	$: data = computeRunningData(totalTime, $raceDetails.raceDistance, splitDistance);
+	$: data = computeRunningData(totalTime, $raceDetails.raceDistance, $raceDetails.splitDistance);
 </script>
 
 <table>
