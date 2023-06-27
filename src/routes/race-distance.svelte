@@ -1,9 +1,9 @@
 <script>
-	import Button from '$lib/components/button.svelte';
+	import { Button, FieldSet } from '$lib/components';
 	import { raceDetails } from './stores';
 </script>
 
-<fieldset>
+<FieldSet>
 	<legend>Race Distance</legend>
 
 	<div class="custom-input">
@@ -18,19 +18,9 @@
 		<Button on:click={() => ($raceDetails.raceDistance = 21.1)}>21.1 km</Button>
 		<Button on:click={() => ($raceDetails.raceDistance = 42.2)}>42.2 km</Button>
 	</div>
-</fieldset>
+</FieldSet>
 
 <style>
-	fieldset {
-		border: 0;
-		padding: 0;
-		margin-bottom: 3rem;
-
-		display: flex;
-		flex-wrap: wrap;
-		gap: 1rem;
-	}
-
 	legend {
 		color: #242428;
 		font-size: 12px;
