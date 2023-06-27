@@ -58,4 +58,17 @@
 	td:focus {
 		background: #eee;
 	}
+
+	input {
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		border: 1px solid #dfdfe8;
+	}
+
+	input:focus {
+		border-color: #007fb6;
+		outline: 0;
+		appearance: none;
+	}
 </style>
