@@ -4,11 +4,13 @@
 	import { raceDetails } from '../../../routes/stores';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
-	export let totalTime: Duration = Duration.fromObject({ minutes: 30 });
-
 	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
 	let data: IRunningData[] = [];
-	$: data = computeRunningData(totalTime, $raceDetails.raceDistance, $raceDetails.splitDistance);
+	$: data = computeRunningData(
+		$raceDetails.targetTime,
+		$raceDetails.raceDistance,
+		$raceDetails.splitDistance
+	);
 </script>
 
 <table>

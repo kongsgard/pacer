@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { HTMLInputTypeAttribute } from 'svelte/elements.d.ts';
 
+	export let name: string | undefined = undefined;
 	export let type: HTMLInputTypeAttribute = 'text';
 	export let inputmode:
 		| 'none'
@@ -18,14 +19,18 @@
 	};
 </script>
 
-<input use:typeAction {inputmode} on:blur bind:value />
+<input {name} use:typeAction {inputmode} on:blur bind:value />
 
 <style>
 	input {
-		width: 12rem;
-		padding: 0 1rem;
-		text-align: center;
+		width: var(--width, 12rem);
+		padding: 6px 10px;
+		padding-right: var(--padding-right, 6px);
+		text-align: var(--text-align, center);
 		border: 1px solid #dfdfe8;
+		border-left-width: var(--border-left-width, 1px);
+		border-right-width: var(--border-right-width, 1px);
+		color: #242428;
 	}
 
 	input:focus {
