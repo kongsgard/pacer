@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Duration } from '$lib/functions/duration';
 	import { computeRunningData, type IRunningData } from '$lib/functions/splits';
 	import { raceDetails } from '../../../routes/stores';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
