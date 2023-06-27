@@ -1,17 +1,34 @@
 import { Duration } from './duration';
 
-export function computeCumulativeNumber(splits: number[]) {
+export function computeRunningData(
+	totalTime: Duration,
+	totalDistance: number,
+	splitDistance: number
+): (number | Duration)[][] {
+	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
+	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);
+	const totalDistances = computeCumulativeNumber(splitDistances);
+	const totalTimes = computeCumulativeTime(splits);
+	const splitsPace = computeSplitsPace(splits, splitDistances);
+
+	const data = [splitDistances, splits, totalDistances, totalTimes, splitsPace];
+	return Array(Math.max(...data.map((a) => a.length)))
+		.fill('')
+		.map((_, i) => data.map((a) => a[i]));
+}
+
+function computeCumulativeNumber(splits: number[]) {
 	return splits.reduce((a, b, i) => (i === 0 ? [b] : [...a, (b += a[i - 1])]), [0]);
 }
 
-export function computeCumulativeTime(splits: Duration[]) {
+function computeCumulativeTime(splits: Duration[]) {
 	return splits.reduce(
 		(a, b, i) => (i === 0 ? [b] : [...a, b.add(a[i - 1])]),
 		[Duration.fromObject({})]
 	);
 }
 
-export function computeSplitDistances(totalDistance: number, splitDistance: number): number[] {
+function computeSplitDistances(totalDistance: number, splitDistance: number): number[] {
 	const fullSplitCount = Math.floor(totalDistance / splitDistance);
 	const splitDistances: number[] = Array(Math.floor(fullSplitCount)).fill(splitDistance);
 
@@ -22,7 +39,7 @@ export function computeSplitDistances(totalDistance: number, splitDistance: numb
 	return splitDistances;
 }
 
-export function computeEqualSplits(
+function computeEqualSplits(
 	totalTime: Duration,
 	totalDistance: number,
 	splitDistance: number
@@ -45,6 +62,6 @@ export function computeEqualSplits(
 	return splits;
 }
 
-export function computeSplitsPace(splits: Duration[], splitDistances: number[]) {
+function computeSplitsPace(splits: Duration[], splitDistances: number[]) {
 	return splits.map((split, index) => split.divide(splitDistances[index]));
 }

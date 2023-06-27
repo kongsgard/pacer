@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { Duration } from '$lib/duration';
-	import {
-		computeEqualSplits,
-		computeSplitsPace,
-		computeSplitDistances,
-		computeCumulativeNumber,
-		computeCumulativeTime
-	} from '$lib/splits';
+	import { computeRunningData } from '$lib/splits';
 	import TableCell from './TableCell.svelte';
 
 	const totalTime = Duration.fromObject({ minutes: 36, seconds: 59 });
@@ -14,19 +8,7 @@
 	const splitDistance = 1;
 
 	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
-
-	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
-	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);
-	const totalDistances = computeCumulativeNumber(splitDistances);
-	const totalTimes = computeCumulativeTime(splits);
-	const splitsPace = computeSplitsPace(splits, splitDistances);
-
-	const zip = (...arr: any[]) =>
-		Array(Math.max(...arr.map((a) => a.length)))
-			.fill('')
-			.map((_, i) => arr.map((a) => a[i]));
-
-	let data = zip(splitDistances, splits, totalDistances, totalTimes, splitsPace);
+	const data = computeRunningData(totalTime, totalDistance, splitDistance);
 </script>
 
 <table>
