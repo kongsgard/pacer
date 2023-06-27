@@ -1,10 +1,18 @@
 import { Duration } from './duration';
 
+export interface IRunningData {
+	splitDistance: number;
+	splitTime: Duration;
+	totalDistance: number;
+	totalTime: Duration;
+	pace: Duration;
+}
+
 export function computeRunningData(
 	totalTime: Duration,
 	totalDistance: number,
 	splitDistance: number
-): (number | Duration)[][] {
+): IRunningData[] {
 	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
 	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);
 	const totalDistances = computeCumulativeNumber(splitDistances);
@@ -14,7 +22,13 @@ export function computeRunningData(
 	const data = [splitDistances, splits, totalDistances, totalTimes, splitsPace];
 	return Array(Math.max(...data.map((a) => a.length)))
 		.fill('')
-		.map((_, i) => data.map((a) => a[i]));
+		.map((_, i) => ({
+			splitDistance: splitDistances[i],
+			splitTime: splits[i],
+			totalDistance: totalDistances[i],
+			totalTime: totalTimes[i],
+			pace: splitsPace[i]
+		}));
 }
 
 function computeCumulativeNumber(splits: number[]) {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Duration } from '$lib/duration';
 	import { computeRunningData } from '$lib/splits';
-	import TableCell from './TableCell.svelte';
+	import TableCell, { CellSuffix } from './TableCell.svelte';
 
 	const totalTime = Duration.fromObject({ minutes: 36, seconds: 59 });
 	const totalDistance = 10;
@@ -23,9 +23,11 @@
 	<tbody>
 		{#each data as row}
 			<tr>
-				{#each row as cell}
-					<TableCell cellValue={cell} />
-				{/each}
+				<TableCell cellValue={row.splitDistance} cellSuffix={CellSuffix.Kilometer} />
+				<TableCell cellValue={row.splitTime} cellSuffix={CellSuffix.MinutesPerKilometer} />
+				<TableCell cellValue={row.totalDistance} cellSuffix={CellSuffix.Kilometer} />
+				<TableCell cellValue={row.totalTime} cellSuffix={CellSuffix.MinutesPerKilometer} />
+				<TableCell cellValue={row.pace} cellSuffix={CellSuffix.MinutesPerKilometer} />
 			</tr>
 		{/each}
 	</tbody>
