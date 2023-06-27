@@ -1,4 +1,5 @@
 <script>
+	import Button from '$lib/components/button.svelte';
 	import { raceDetails } from './stores';
 </script>
 
@@ -11,11 +12,11 @@
 	</div>
 
 	<div class="button-group">
-		<button on:click={() => ($raceDetails.raceDistance = 3)}>3 km</button>
-		<button on:click={() => ($raceDetails.raceDistance = 5)}>5 km</button>
-		<button on:click={() => ($raceDetails.raceDistance = 10)}>10 km</button>
-		<button on:click={() => ($raceDetails.raceDistance = 21.1)}>21.1 km</button>
-		<button on:click={() => ($raceDetails.raceDistance = 42.2)}>42.2 km</button>
+		<Button on:click={() => ($raceDetails.raceDistance = 3)}>3 km</Button>
+		<Button on:click={() => ($raceDetails.raceDistance = 5)}>5 km</Button>
+		<Button on:click={() => ($raceDetails.raceDistance = 10)}>10 km</Button>
+		<Button on:click={() => ($raceDetails.raceDistance = 21.1)}>21.1 km</Button>
+		<Button on:click={() => ($raceDetails.raceDistance = 42.2)}>42.2 km</Button>
 	</div>
 </fieldset>
 
@@ -70,27 +71,5 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 1rem;
-	}
-
-	button {
-		background-color: #fff;
-		color: #242428;
-		align-items: center;
-		border: 1px solid #dfdfe8;
-		border-radius: 4px;
-		cursor: pointer;
-		padding: 6px 10px;
-	}
-
-	button:hover {
-		background-color: #e6e6e6;
-		border-color: #bbbbce;
-	}
-
-	button:active {
-		background-color: #e6e6e6;
-		border-color: #bbbbce;
-		box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-		outline: 0;
 	}
 </style>
