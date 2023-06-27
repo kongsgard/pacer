@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { Button, FieldSet, TextInput } from '$lib/components';
+	import { Button, FieldSet, Legend, TextInput } from '$lib/components';
 	import { raceDetails } from './stores';
 </script>
 
 <FieldSet>
-	<legend>Race Distance</legend>
+	<Legend>Race Distance</Legend>
 
 	<div class="custom-input">
 		<TextInput type="number" inputmode="decimal" bind:value={$raceDetails.raceDistance} />
@@ -21,14 +21,6 @@
 </FieldSet>
 
 <style>
-	legend {
-		color: #242428;
-		font-size: 12px;
-		margin-top: 0;
-		margin-bottom: 5px;
-		padding: 0;
-	}
-
 	.custom-input {
 		display: flex;
 	}
