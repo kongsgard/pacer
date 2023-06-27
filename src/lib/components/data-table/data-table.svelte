@@ -1,14 +1,15 @@
 <script lang="ts">
-	import type { Duration } from '$lib/functions/duration';
-	import { computeRunningData } from '$lib/functions/splits';
+	import { Duration } from '$lib/functions/duration';
+	import { computeRunningData, type IRunningData } from '$lib/functions/splits';
+	import { raceDetails } from '../../../routes/stores';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
-	export let totalTime: Duration;
-	export let totalDistance: number;
-	export let splitDistance: number;
+	export let totalTime: Duration = Duration.fromObject({ minutes: 30 });
+	export let splitDistance: number = 1;
 
 	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
-	const data = computeRunningData(totalTime, totalDistance, splitDistance);
+	let data: IRunningData[] = [];
+	$: data = computeRunningData(totalTime, $raceDetails.raceDistance, splitDistance);
 </script>
 
 <table>

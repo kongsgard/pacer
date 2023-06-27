@@ -1,17 +1,21 @@
+<script>
+	import { raceDetails } from './stores';
+</script>
+
 <fieldset>
 	<legend>Race Distance</legend>
 
 	<div class="custom-input">
-		<input type="number" />
+		<input type="number" inputmode="decimal" bind:value={$raceDetails.raceDistance} />
 		<div>kilometers</div>
 	</div>
 
 	<div class="button-group">
-		<button>3 km</button>
-		<button>5 km</button>
-		<button>10 km</button>
-		<button>21.1 km</button>
-		<button>42.2 km</button>
+		<button on:click={() => ($raceDetails.raceDistance = 3)}>3 km</button>
+		<button on:click={() => ($raceDetails.raceDistance = 5)}>5 km</button>
+		<button on:click={() => ($raceDetails.raceDistance = 10)}>10 km</button>
+		<button on:click={() => ($raceDetails.raceDistance = 21.1)}>21.1 km</button>
+		<button on:click={() => ($raceDetails.raceDistance = 42.2)}>42.2 km</button>
 	</div>
 </fieldset>
 

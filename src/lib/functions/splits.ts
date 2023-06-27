@@ -10,9 +10,13 @@ export interface IRunningData {
 
 export function computeRunningData(
 	totalTime: Duration,
-	totalDistance: number,
-	splitDistance: number
+	totalDistance?: number,
+	splitDistance?: number
 ): IRunningData[] {
+	if (!totalDistance || !splitDistance) {
+		return [];
+	}
+
 	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
 	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);
 	const totalDistances = computeCumulativeNumber(splitDistances);

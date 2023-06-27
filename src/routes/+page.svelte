@@ -4,13 +4,12 @@
 	import { Duration } from '$lib/functions/duration';
 
 	const totalTime = Duration.fromObject({ minutes: 36, seconds: 59 });
-	const totalDistance = 10;
 	const splitDistance = 1;
 </script>
 
 <main>
 	<RaceDistance />
-	<DataTable {totalTime} {totalDistance} {splitDistance} />
+	<DataTable {totalTime} {splitDistance} />
 </main>
 
 <style>
