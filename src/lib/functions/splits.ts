@@ -16,6 +16,9 @@ export function computeRunningData(
 	if (!totalDistance || !splitDistance) {
 		return [];
 	}
+	if (totalDistance == 0 || splitDistance == 0) {
+		return [];
+	}
 
 	const splitDistances = computeSplitDistances(totalDistance, splitDistance);
 	const splits = computeEqualSplits(totalTime, totalDistance, splitDistance);

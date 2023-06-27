@@ -1,5 +1,5 @@
-<script>
-	import { Button, FieldSet } from '$lib/components';
+<script lang="ts">
+	import { Button, FieldSet, TextInput } from '$lib/components';
 	import { raceDetails } from './stores';
 </script>
 
@@ -7,7 +7,7 @@
 	<legend>Race Distance</legend>
 
 	<div class="custom-input">
-		<input type="number" inputmode="decimal" bind:value={$raceDetails.raceDistance} />
+		<TextInput type="number" inputmode="decimal" bind:value={$raceDetails.raceDistance} />
 		<div>kilometers</div>
 	</div>
 
@@ -31,19 +31,6 @@
 
 	.custom-input {
 		display: flex;
-	}
-
-	input {
-		width: 12rem;
-		padding: 0 1rem;
-		text-align: center;
-		border: 1px solid #dfdfe8;
-	}
-
-	input:focus {
-		border-color: #007fb6;
-		outline: 0;
-		appearance: none;
 	}
 
 	.custom-input > div {
