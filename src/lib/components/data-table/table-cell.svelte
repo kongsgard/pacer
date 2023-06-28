@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	export enum CellSuffix {
+		None,
 		Kilometer,
 		MinutesPerKilometer
 	}
@@ -9,7 +10,7 @@
 	import { Duration } from '$lib/functions/duration';
 
 	export let cellValue: number | Duration;
-	export let cellSuffix: CellSuffix = CellSuffix.Kilometer;
+	export let cellSuffix: CellSuffix = CellSuffix.None;
 
 	let isFocused = false;
 	const toggleFocus = () => (isFocused = !isFocused);

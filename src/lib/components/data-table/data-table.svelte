@@ -25,9 +25,9 @@
 		{#each data as row}
 			<tr>
 				<TableCell cellValue={row.splitDistance} cellSuffix={CellSuffix.Kilometer} />
-				<TableCell cellValue={row.splitTime} cellSuffix={CellSuffix.MinutesPerKilometer} />
+				<TableCell cellValue={row.splitTime} />
 				<TableCell cellValue={row.totalDistance} cellSuffix={CellSuffix.Kilometer} />
-				<TableCell cellValue={row.totalTime} cellSuffix={CellSuffix.MinutesPerKilometer} />
+				<TableCell cellValue={row.totalTime} />
 				<TableCell cellValue={row.pace} cellSuffix={CellSuffix.MinutesPerKilometer} />
 			</tr>
 		{/each}
