@@ -3,7 +3,7 @@
 	import { raceDetails } from '../../../routes/stores';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
-	let columns = ['Split Distance', 'Split Time', 'Total Distance', 'Total Time', 'Pace'];
+	let columns = ['Distance', 'Total Time', 'Split Time', 'Pace'];
 	let data: IRunningData[] = [];
 	$: data = computeRunningData(
 		$raceDetails.targetTime,
@@ -24,10 +24,9 @@
 	<tbody>
 		{#each data as row}
 			<tr>
-				<TableCell cellValue={row.splitDistance} cellSuffix={CellSuffix.Kilometer} />
-				<TableCell cellValue={row.splitTime} />
 				<TableCell cellValue={row.totalDistance} cellSuffix={CellSuffix.Kilometer} />
 				<TableCell cellValue={row.totalTime} />
+				<TableCell cellValue={row.splitTime} />
 				<TableCell cellValue={row.pace} cellSuffix={CellSuffix.MinutesPerKilometer} />
 			</tr>
 		{/each}
@@ -44,7 +43,7 @@
 
 	tr {
 		display: grid;
-		grid-template-columns: repeat(5, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 
 	tbody tr:hover {

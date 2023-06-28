@@ -1,10 +1,9 @@
 import { Duration } from './duration';
 
 export interface IRunningData {
-	splitDistance: number;
-	splitTime: Duration;
 	totalDistance: number;
 	totalTime: Duration;
+	splitTime: Duration;
 	pace: Duration;
 }
 
@@ -30,10 +29,9 @@ export function computeRunningData(
 	return Array(Math.max(...data.map((a) => a.length)))
 		.fill('')
 		.map((_, i) => ({
-			splitDistance: parseFloat(splitDistances[i].toFixed(1)),
-			splitTime: splits[i],
 			totalDistance: parseFloat(totalDistances[i].toFixed(1)),
 			totalTime: totalTimes[i],
+			splitTime: splits[i],
 			pace: splitsPace[i]
 		}));
 }
