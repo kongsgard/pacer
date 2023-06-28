@@ -44,11 +44,12 @@ export class Duration implements IDuration {
 	}
 
 	public subtract(duration: IPartialDuration): Duration {
-		return Duration.fromObject({
-			hours: this.hours - (duration.hours ?? 0),
-			minutes: this.minutes - (duration.minutes ?? 0),
-			seconds: this.seconds - (duration.seconds ?? 0)
-		});
+		const differenceSeconds =
+			(this.hours - (duration.hours ?? 0)) * 3600 +
+			(this.minutes - (duration.minutes ?? 0)) * 60 +
+			(this.seconds - (duration.seconds ?? 0));
+
+		return Duration.fromObject({ seconds: differenceSeconds });
 	}
 
 	public multiply(factor: number): Duration {

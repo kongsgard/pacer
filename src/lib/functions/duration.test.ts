@@ -12,6 +12,16 @@ describe('duration test', () => {
 		expect(duration.add({ seconds: 1 })).toStrictEqual(Duration.fromObject({ hours: 1 }));
 	});
 
+	it('adds 60 seconds to 60 seconds to equal 2 minutes', () => {
+		const duration = Duration.fromObject({ seconds: 60 });
+		expect(duration.add({ seconds: 60 })).toStrictEqual(Duration.fromObject({ minutes: 2 }));
+	});
+
+	it('subtracts 1 second from 1 minute to equal 59 seconds', () => {
+		const duration = Duration.fromObject({ minutes: 1 });
+		expect(duration.subtract({ seconds: 1 })).toStrictEqual(Duration.fromObject({ seconds: 59 }));
+	});
+
 	it('double a duration of 1 minute equals 2 minutes', () => {
 		const duration = Duration.fromObject({ minutes: 1 });
 		expect(duration.multiply(2)).toStrictEqual(Duration.fromObject({ minutes: 2 }));
