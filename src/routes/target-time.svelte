@@ -67,6 +67,7 @@
 		color: #666;
 		font-size: 1.2rem;
 		user-select: none;
+		pointer-events: none;
 	}
 
 	abbr[title] {
