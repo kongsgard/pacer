@@ -54,7 +54,7 @@ function computeSplitDistances(totalDistance: number, splitDistance: number): nu
 	const splitDistances: number[] = Array(Math.floor(fullSplitCount)).fill(splitDistance);
 
 	const splitDistancesSum = splitDistances.reduce((a, b) => (a += b), 0);
-	if (totalDistance - splitDistancesSum > 0) {
+	if (totalDistance - splitDistancesSum > 0.01) {
 		splitDistances.push(totalDistance - splitDistancesSum);
 	}
 	return splitDistances;
