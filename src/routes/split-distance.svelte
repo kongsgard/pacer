@@ -13,7 +13,7 @@
 
 	<div class="button-group">
 		<Button on:click={() => ($raceDetails.splitDistance = 0.2)}>200 m</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 0.5)}>500 m</Button>
+		<Button on:click={() => ($raceDetails.splitDistance = 0.4)}>400 m</Button>
 		<Button on:click={() => ($raceDetails.splitDistance = 1)}>1 km</Button>
 		<Button on:click={() => ($raceDetails.splitDistance = 2)}>2 km</Button>
 		<Button on:click={() => ($raceDetails.splitDistance = 5)}>5 km</Button>
