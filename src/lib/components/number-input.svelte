@@ -1,8 +1,5 @@
 <script lang="ts">
-	import type { HTMLInputTypeAttribute } from 'svelte/elements.d.ts';
-
 	export let name: string | undefined = undefined;
-	export let type: HTMLInputTypeAttribute = 'text';
 	export let inputmode:
 		| 'none'
 		| 'text'
@@ -13,13 +10,9 @@
 		| 'decimal'
 		| 'search' = 'text';
 	export let value: any = undefined;
-
-	const typeAction = (node: HTMLInputElement) => {
-		node.type = type;
-	};
 </script>
 
-<input {name} use:typeAction {inputmode} on:blur bind:value />
+<input type="number" {name} {inputmode} on:blur bind:value />
 
 <style>
 	input {

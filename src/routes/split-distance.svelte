@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, FieldSet, Legend, TextInput } from '$lib/components';
+	import { Button, FieldSet, Legend, NumberInput } from '$lib/components';
 	import { raceDetails } from './stores';
 </script>
 
@@ -7,7 +7,7 @@
 	<Legend>Split Distance</Legend>
 
 	<div class="custom-input">
-		<TextInput type="number" inputmode="decimal" bind:value={$raceDetails.splitDistance} />
+		<NumberInput inputmode="decimal" bind:value={$raceDetails.splitDistance} />
 		<div>kilometers</div>
 	</div>
 

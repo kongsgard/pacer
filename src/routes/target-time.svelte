@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { FieldSet, Legend, TextInput } from '$lib/components';
+	import { FieldSet, Legend, NumberInput } from '$lib/components';
 	import { raceDetails } from './stores';
 </script>
 
@@ -11,9 +11,8 @@
 			<label for="time_hours">
 				<abbr title="hours">hr</abbr>
 			</label>
-			<TextInput
+			<NumberInput
 				name="time_hours"
-				type="number"
 				inputmode="numeric"
 				bind:value={$raceDetails.targetTime.hours}
 				--border-right-width="0"
@@ -26,9 +25,8 @@
 			<label for="time_minutes">
 				<abbr title="minutes">min</abbr>
 			</label>
-			<TextInput
+			<NumberInput
 				name="time_minutes"
-				type="number"
 				inputmode="numeric"
 				bind:value={$raceDetails.targetTime.minutes}
 				--width="8rem"
@@ -40,9 +38,8 @@
 			<label for="time_seconds">
 				<abbr title="seconds">s</abbr>
 			</label>
-			<TextInput
+			<NumberInput
 				name="time_seconds"
-				type="number"
 				inputmode="numeric"
 				bind:value={$raceDetails.targetTime.seconds}
 				--border-left-width="0"
