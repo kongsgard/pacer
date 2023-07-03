@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { computeRunningData, type IRunningData } from '$lib/functions/splits';
+	import type { Duration } from '$lib/functions/duration';
+	import { computeRunningData, updateRunningData, type IRunningData } from '$lib/functions/splits';
 	import { raceDetails } from '../../../routes/stores';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
@@ -10,6 +11,10 @@
 		$raceDetails.raceDistance,
 		$raceDetails.splitDistance
 	);
+
+	const onChange = (value: Duration, rowIndex: number, key: keyof IRunningData) => {
+		data = updateRunningData(data, value, rowIndex, key);
+	};
 </script>
 
 <table>
@@ -22,12 +27,24 @@
 	</thead>
 
 	<tbody>
-		{#each data as row}
+		{#each data as row, rowIndex}
 			<tr>
-				<TableCell cellValue={row.totalDistance} cellSuffix={CellSuffix.Kilometer} />
-				<TableCell cellValue={row.totalTime} />
-				<TableCell cellValue={row.splitTime} />
-				<TableCell cellValue={row.pace} cellSuffix={CellSuffix.MinutesPerKilometer} />
+				<TableCell
+					cellValue={row.totalDistance}
+					{onChange}
+					{rowIndex}
+					key={'totalDistance'}
+					cellSuffix={CellSuffix.Kilometer}
+				/>
+				<TableCell cellValue={row.totalTime} {onChange} {rowIndex} key={'totalTime'} />
+				<TableCell cellValue={row.splitTime} {onChange} {rowIndex} key={'splitTime'} />
+				<TableCell
+					cellValue={row.pace}
+					{onChange}
+					{rowIndex}
+					key={'pace'}
+					cellSuffix={CellSuffix.MinutesPerKilometer}
+				/>
 			</tr>
 		{/each}
 	</tbody>

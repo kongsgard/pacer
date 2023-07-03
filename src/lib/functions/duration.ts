@@ -24,6 +24,27 @@ export class Duration implements IDuration {
 		return new Duration(duration.hours ?? 0, duration.minutes ?? 0, duration.seconds ?? 0);
 	}
 
+	public static fromString(duration: string): Duration {
+		const timeUnits = duration.split(':');
+		switch (timeUnits.length) {
+			case 1: {
+				const [seconds] = timeUnits;
+				return new Duration(0, 0, parseInt(seconds));
+			}
+			case 2: {
+				const [minutes, seconds] = timeUnits;
+				return new Duration(0, parseInt(minutes), parseInt(seconds));
+			}
+			case 3: {
+				const [hours, minutes, seconds] = timeUnits;
+				return new Duration(parseInt(hours), parseInt(minutes), parseInt(seconds));
+			}
+			default: {
+				return new Duration(0, 0, 0);
+			}
+		}
+	}
+
 	public toString(): string {
 		const pad = (unit: number) => {
 			return unit.toString().padStart(2, '0');

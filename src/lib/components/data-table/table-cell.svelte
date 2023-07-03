@@ -8,28 +8,38 @@
 
 <script lang="ts">
 	import { Duration } from '$lib/functions/duration';
+	import type { IRunningData } from '$lib/functions/splits';
 
+	export let onChange: (value: Duration, rowIndex: number, key: keyof IRunningData) => void;
+	export let rowIndex: number;
+	export let key: keyof IRunningData;
 	export let cellValue: number | Duration;
 	export let cellSuffix: CellSuffix = CellSuffix.None;
 
 	let isFocused = false;
-	const toggleFocus = () => (isFocused = !isFocused);
+	const onFocus = () => (isFocused = true);
+	const onBlur = (event: Event) => {
+		isFocused = false;
+		if (cellValue instanceof Duration) {
+			const target = event.target as HTMLInputElement;
+			const duration = Duration.fromString(target.value);
+			if (JSON.stringify(duration) != JSON.stringify(cellValue)) {
+				onChange(duration, rowIndex, key);
+			}
+		}
+	};
 
 	const autofocus = (el: HTMLInputElement) => el.focus();
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<td on:click={toggleFocus}>
+<td on:click={onFocus}>
 	{#if isFocused}
 		<!-- svelte-ignore a11y-autofocus -->
-		{#if cellValue instanceof Duration}
-			<input use:autofocus on:blur={toggleFocus} bind:value={cellValue} />
-		{:else}
-			<input use:autofocus on:blur={toggleFocus} bind:value={cellValue} />
-		{/if}
+		<input use:autofocus on:blur={onBlur} value={cellValue} />
 	{:else}
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->
-		<a on:focus={toggleFocus} tabindex="0" />
+		<a on:focus={onFocus} tabindex="0" />
 		{cellValue}
 		{#if cellSuffix == CellSuffix.Kilometer}
 			<abbr class="unit" title="kilometers">km</abbr>

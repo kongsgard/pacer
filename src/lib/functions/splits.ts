@@ -36,6 +36,42 @@ export function computeRunningData(
 		}));
 }
 
+export function updateRunningData(
+	data: IRunningData[],
+	value: Duration,
+	index: number,
+	key: keyof IRunningData
+): IRunningData[] {
+	switch (key) {
+		case 'totalTime': {
+			data[index].splitTime = value.subtract(data[index - 1]?.totalTime ?? Duration.fromObject({}));
+			data[index].pace = data[index].splitTime.divide(
+				data[index].totalDistance - (data[index - 1]?.totalDistance ?? 0)
+			);
+			break;
+		}
+		case 'splitTime': {
+			data[index].splitTime = value;
+			data[index].pace = value.divide(
+				data[index].totalDistance - (data[index - 1]?.totalDistance ?? 0)
+			);
+			break;
+		}
+		case 'pace': {
+			data[index].splitTime = value.multiply(
+				data[index].totalDistance - (data[index - 1]?.totalDistance ?? 0)
+			);
+			data[index].pace = value;
+			break;
+		}
+	}
+
+	const totalTimes = computeCumulativeTime(data.map((e) => e.splitTime));
+	data.forEach((e, i) => (e.totalTime = totalTimes[i]));
+
+	return data;
+}
+
 function computeCumulativeNumber(splits: number[]) {
 	return splits.reduce((a, b, i) => (i === 0 ? [b] : [...a, (b += a[i - 1])]), [0]);
 }
