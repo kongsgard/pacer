@@ -7,7 +7,11 @@ export interface IDuration {
 export type IPartialDuration = Partial<IDuration>;
 
 export class Duration implements IDuration {
-	public constructor(public hours: number, public minutes: number, public seconds: number) {
+	public constructor(
+		public hours: number,
+		public minutes: number,
+		public seconds: number
+	) {
 		[hours, minutes, seconds].forEach((unit) => {
 			if (unit < 0 || !Number.isInteger(unit)) {
 				throw new Error(`Invalid input: ${hours}:${minutes}:${seconds}`);

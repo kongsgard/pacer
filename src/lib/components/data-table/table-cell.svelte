@@ -32,10 +32,8 @@
 	const autofocus = (el: HTMLInputElement) => el.focus();
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <td on:click={onFocus}>
 	{#if isFocused}
-		<!-- svelte-ignore a11y-autofocus -->
 		<input use:autofocus on:blur={onBlur} value={cellValue} />
 	{:else}
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->

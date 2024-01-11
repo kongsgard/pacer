@@ -9,7 +9,7 @@
 		| 'numeric'
 		| 'decimal'
 		| 'search' = 'text';
-	export let value: any = undefined;
+	export let value: number | undefined = undefined;
 </script>
 
 <input type="number" {name} {inputmode} on:blur bind:value />
