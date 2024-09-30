@@ -12,7 +12,7 @@
 	export let value: number | undefined = undefined;
 </script>
 
-<input type="number" {name} {inputmode} on:blur bind:value />
+<input type="number" {name} {inputmode} on:blur on:focus bind:value />
 
 <style>
 	input {
