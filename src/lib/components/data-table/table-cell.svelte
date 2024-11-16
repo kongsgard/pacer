@@ -36,8 +36,8 @@
 	{#if isFocused}
 		<input use:autofocus on:blur={onBlur} value={cellValue} />
 	{:else}
-		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y-missing-content -->
-		<a on:focus={onFocus} tabindex="0" />
+		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y_consider_explicit_label -->
+		<a on:focus={onFocus} tabindex="0"></a>
 		{cellValue}
 		{#if cellSuffix == CellSuffix.Kilometer}
 			<abbr class="unit" title="kilometers">km</abbr>
