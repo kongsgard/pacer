@@ -1,18 +1,21 @@
 <script lang="ts">
-	export let name: string | undefined = undefined;
-	export let inputmode:
-		| 'none'
-		| 'text'
-		| 'tel'
-		| 'url'
-		| 'email'
-		| 'numeric'
-		| 'decimal'
-		| 'search' = 'text';
-	export let value: number | undefined = undefined;
+	type Props = {
+		name?: string | undefined;
+		inputmode: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search';
+		value: number | undefined;
+		onblur?: () => void;
+		onfocus?: () => void;
+	};
+	let {
+		name = undefined,
+		inputmode = 'text',
+		value = $bindable(),
+		onblur = () => {},
+		onfocus = () => {}
+	}: Props = $props();
 </script>
 
-<input type="number" {name} {inputmode} on:blur on:focus bind:value />
+<input type="number" {name} {inputmode} {onblur} {onfocus} bind:value />
 
 <style>
 	input {

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	export enum CellSuffix {
 		None,
 		Kilometer,
@@ -10,13 +10,16 @@
 	import { Duration } from '$lib/functions/duration';
 	import type { IRunningData } from '$lib/functions/splits';
 
-	export let onChange: (value: Duration, rowIndex: number, key: keyof IRunningData) => void;
-	export let rowIndex: number;
-	export let key: keyof IRunningData;
-	export let cellValue: number | Duration;
-	export let cellSuffix: CellSuffix = CellSuffix.None;
+	type Props = {
+		onChange: (value: Duration, rowIndex: number, key: keyof IRunningData) => void;
+		rowIndex: number;
+		key: keyof IRunningData;
+		cellValue: number | Duration;
+		cellSuffix?: CellSuffix;
+	};
+	let { onChange, rowIndex, key, cellValue, cellSuffix = CellSuffix.None }: Props = $props();
 
-	let isFocused = false;
+	let isFocused = $state(false);
 	const onFocus = () => (isFocused = true);
 	const onBlur = (event: Event) => {
 		isFocused = false;
@@ -32,12 +35,14 @@
 	const autofocus = (el: HTMLInputElement) => el.focus();
 </script>
 
-<td on:click={onFocus}>
+<td onclick={onFocus}>
 	{#if isFocused}
-		<input use:autofocus on:blur={onBlur} value={cellValue} />
+		<input use:autofocus onblur={onBlur} value={cellValue} />
 	{:else}
-		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y_consider_explicit_label -->
-		<a on:focus={onFocus} tabindex="0"></a>
+		<!-- svelte-ignore a11y_consider_explicit_label -->
+		<!-- svelte-ignore a11y_missing_attribute -->
+		<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+		<a onfocus={onFocus} tabindex="0"></a>
 		{cellValue}
 		{#if cellSuffix == CellSuffix.Kilometer}
 			<abbr class="unit" title="kilometers">km</abbr>

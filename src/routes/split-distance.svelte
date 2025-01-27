@@ -1,23 +1,25 @@
 <script lang="ts">
 	import { Button, FieldSet, Legend, NumberInput } from '$lib/components';
-	import { raceDetails } from './stores';
+	import { getRaceState } from '$lib/race-state.svelte';
+
+	const raceState = getRaceState();
 </script>
 
 <FieldSet>
 	<Legend>Split Distance</Legend>
 
 	<div class="custom-input">
-		<NumberInput inputmode="decimal" bind:value={$raceDetails.splitDistance} />
+		<NumberInput inputmode="decimal" bind:value={raceState.splitDistance} />
 		<div>kilometers</div>
 	</div>
 
 	<div class="button-group">
-		<Button on:click={() => ($raceDetails.splitDistance = 0.2)}>200 m</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 0.4)}>400 m</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 0.5465)}>Bislett</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 1)}>1 km</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 2)}>2 km</Button>
-		<Button on:click={() => ($raceDetails.splitDistance = 5)}>5 km</Button>
+		<Button onclick={() => (raceState.splitDistance = 0.2)}>200 m</Button>
+		<Button onclick={() => (raceState.splitDistance = 0.4)}>400 m</Button>
+		<Button onclick={() => (raceState.splitDistance = 0.5465)}>Bislett</Button>
+		<Button onclick={() => (raceState.splitDistance = 1)}>1 km</Button>
+		<Button onclick={() => (raceState.splitDistance = 2)}>2 km</Button>
+		<Button onclick={() => (raceState.splitDistance = 5)}>5 km</Button>
 	</div>
 </FieldSet>
 

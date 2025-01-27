@@ -1,16 +1,18 @@
 <script lang="ts">
 	import { FieldSet, Legend, NumberInput } from '$lib/components';
-	import { raceDetails } from './stores';
+	import { getRaceState } from '$lib/race-state.svelte';
+
+	const raceState = getRaceState();
 
 	function handleFocus(part: 'hours' | 'minutes' | 'seconds') {
-		if ($raceDetails.targetTime[part] === 0) {
-			$raceDetails.targetTime[part] = null as unknown as number;
+		if (raceState.targetTime[part] === 0) {
+			raceState.targetTime[part] = null as unknown as number;
 		}
 	}
 
 	function handleBlur(part: 'hours' | 'minutes' | 'seconds') {
-		if ($raceDetails.targetTime[part] === null) {
-			$raceDetails.targetTime[part] = 0;
+		if (raceState.targetTime[part] === null) {
+			raceState.targetTime[part] = 0;
 		}
 	}
 </script>
@@ -26,9 +28,9 @@
 			<NumberInput
 				name="time_hours"
 				inputmode="numeric"
-				bind:value={$raceDetails.targetTime.hours}
-				on:focus={() => handleFocus('hours')}
-				on:blur={() => handleBlur('hours')}
+				bind:value={raceState.targetTime.hours}
+				onfocus={() => handleFocus('hours')}
+				onblur={() => handleBlur('hours')}
 				--border-right-width="0"
 				--width="8rem"
 				--padding-right="34px"
@@ -42,9 +44,9 @@
 			<NumberInput
 				name="time_minutes"
 				inputmode="numeric"
-				bind:value={$raceDetails.targetTime.minutes}
-				on:focus={() => handleFocus('minutes')}
-				on:blur={() => handleBlur('minutes')}
+				bind:value={raceState.targetTime.minutes}
+				onfocus={() => handleFocus('minutes')}
+				onblur={() => handleBlur('minutes')}
 				--width="8rem"
 				--padding-right="34px"
 				--text-align="right"
@@ -57,9 +59,9 @@
 			<NumberInput
 				name="time_seconds"
 				inputmode="numeric"
-				bind:value={$raceDetails.targetTime.seconds}
-				on:focus={() => handleFocus('seconds')}
-				on:blur={() => handleBlur('seconds')}
+				bind:value={raceState.targetTime.seconds}
+				onfocus={() => handleFocus('seconds')}
+				onblur={() => handleBlur('seconds')}
 				--border-left-width="0"
 				--width="8rem"
 				--padding-right="34px"

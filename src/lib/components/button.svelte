@@ -1,5 +1,15 @@
-<button on:click>
-	<slot />
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	type Props = {
+		children: Snippet;
+		onclick: () => void;
+	};
+	let { children, onclick }: Props = $props();
+</script>
+
+<button {onclick}>
+	{@render children()}
 </button>
 
 <style>

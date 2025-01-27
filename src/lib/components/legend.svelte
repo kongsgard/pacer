@@ -1,4 +1,15 @@
-<legend><slot /></legend>
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	type Props = {
+		children: Snippet;
+	};
+	let { children }: Props = $props();
+</script>
+
+<legend>
+	{@render children()}
+</legend>
 
 <style>
 	legend {

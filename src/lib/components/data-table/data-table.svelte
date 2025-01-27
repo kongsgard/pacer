@@ -1,19 +1,21 @@
 <script lang="ts">
 	import type { Duration } from '$lib/functions/duration';
 	import { computeRunningData, updateRunningData, type IRunningData } from '$lib/functions/splits';
-	import { raceDetails } from '../../../routes/stores';
+	import { getRaceState } from '$lib/race-state.svelte';
 	import TableCell, { CellSuffix } from './table-cell.svelte';
 
-	let columns = ['Distance', 'Total Time', 'Split Time', 'Pace'];
-	let data: IRunningData[] = [];
-	$: data = computeRunningData(
-		$raceDetails.targetTime,
-		$raceDetails.raceDistance,
-		$raceDetails.splitDistance
+	const raceState = getRaceState();
+
+	const columns = ['Distance', 'Total Time', 'Split Time', 'Pace'];
+
+	let modifiedData = $state<IRunningData[] | undefined>();
+	let data: IRunningData[] = $derived(
+		modifiedData ??
+			computeRunningData(raceState.targetTime, raceState.raceDistance, raceState.splitDistance)
 	);
 
 	const onChange = (value: Duration, rowIndex: number, key: keyof IRunningData) => {
-		data = updateRunningData(data, value, rowIndex, key);
+		modifiedData = updateRunningData(data, value, rowIndex, key);
 	};
 </script>
 
