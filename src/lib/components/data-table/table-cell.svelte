@@ -1,11 +1,3 @@
-<script lang="ts" context="module">
-	export enum CellSuffix {
-		None,
-		Kilometer,
-		MinutesPerKilometer
-	}
-</script>
-
 <script lang="ts">
 	import { Duration } from '$lib/functions/duration';
 	import type { IRunningData } from '$lib/functions/splits';
@@ -14,7 +6,7 @@
 	export let rowIndex: number;
 	export let key: keyof IRunningData;
 	export let cellValue: number | Duration;
-	export let cellSuffix: CellSuffix = CellSuffix.None;
+	export let cellSuffix: 'none' | 'kilometer' | 'minutesPerKilometer' = 'none';
 
 	let isFocused = false;
 	const onFocus = () => (isFocused = true);
@@ -39,9 +31,9 @@
 		<!-- svelte-ignore a11y-no-noninteractive-tabindex a11y-missing-attribute a11y_consider_explicit_label -->
 		<a on:focus={onFocus} tabindex="0"></a>
 		{cellValue}
-		{#if cellSuffix == CellSuffix.Kilometer}
+		{#if cellSuffix === 'kilometer'}
 			<abbr class="unit" title="kilometers">km</abbr>
-		{:else if cellSuffix == CellSuffix.MinutesPerKilometer}
+		{:else if cellSuffix === 'minutesPerKilometer'}
 			<abbr class="unit" title="minutes per kilometer">/km</abbr>
 		{/if}
 	{/if}
