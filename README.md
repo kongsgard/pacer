@@ -1,5 +1,7 @@
 # Pacer
 
+Calculate the splits for your next race!
+
 Made with Svelte and SvelteKit.
 
 ## Developing
